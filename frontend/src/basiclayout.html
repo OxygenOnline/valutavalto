@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Currency Exchange Application</title>
+    <link rel="stylesheet" type="text/css" href="basiclayout.css">
+</head>
+<body>
+<header>
+
+</header>
+<main>
+    <h1>Currency Converter (base:EUR)</h1>
+    <form id="currencyConverterForm">
+        <div class="input-row">
+            <label for="amount">Amount to convert:</label>
+            <input type="text" id="amount" name="amount" placeholder="Enter the amount" required>
+        </div>
+        <input type="hidden" id="baseCurrency" name="baseCurrency" value="EUR">
+        <label for="targetCurrency">Select target currency:</label>
+        <select id="targetCurrency" name="targetCurrency">
+
+            <!-- TODO: Fetch the available currencies for the list (I added some examples to check the html) -->
+            <option value="HUF">HUF</option>
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+        </select>
+        <div class="input-row">
+            <button type="submit" class="convert-button">Convert</button>
+        </div>
+    </form>
+    <div id="result">
+
+        <!-- TODO:Code needed for the result! -->
+        <span id="convertedAmountPlaceholder">Your converted result: placeholder_for_result </span>
+    </div>
+</main>
+<footer>
+
+</footer>
+</body>
+</html>
+

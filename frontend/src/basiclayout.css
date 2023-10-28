@@ -1,0 +1,27 @@
+@media screen and (max-width: 768px) {
+    .input-row {
+        display: block;
+    }
+}
+
+.input-row {
+    margin-bottom: 20px;
+}
+
+.convert-button {
+    margin-top: 20px;
+    width: 120px;
+    height: 40px;
+    font-size: 16px;
+    padding: 8px 16px;
+    background-color: lightgreen;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.convert-button:hover {
+    background-color: lime;
+}
+
