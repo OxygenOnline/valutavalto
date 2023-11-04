@@ -7,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Map;
+
 
 @Service
 public class FixerServiceImpl implements FixerService {
@@ -20,6 +22,20 @@ public class FixerServiceImpl implements FixerService {
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
         this.apiKey = apiKey;
+    }
+
+    public Map<String, Double> allLatestCurrencyRates() {
+
+        var responseMono = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/latest")
+                        .queryParam("access_key", apiKey)
+                        .queryParam("format", 1)
+                        .build())
+                .retrieve()
+                .bodyToMono(FixerLatestCurrencyResponse.class);
+
+        return responseMono.map(FixerLatestCurrencyResponse::getRates).block();
     }
 
     public double latestCurrencyRate(String toCurrency) {
