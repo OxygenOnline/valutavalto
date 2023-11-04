@@ -6,8 +6,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Map;
+import java.util.Optional;
 
 
 @Service
@@ -24,31 +26,25 @@ public class FixerServiceImpl implements FixerService {
         this.apiKey = apiKey;
     }
 
-    public Map<String, Double> allLatestCurrencyRates() {
+    private Map<String, Double> getCurrencyRates(Optional<String> symbols) {
+        var uriBuilder = UriComponentsBuilder.fromPath("/latest")
+                .queryParam("access_key", apiKey)
+                .queryParamIfPresent("symbols", symbols)
+                .queryParam("format", 1);
 
         var responseMono = webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/latest")
-                        .queryParam("access_key", apiKey)
-                        .queryParam("format", 1)
-                        .build())
+                .uri(uriBuilder.build().toUriString())
                 .retrieve()
                 .bodyToMono(FixerLatestCurrencyResponse.class);
 
         return responseMono.map(FixerLatestCurrencyResponse::getRates).block();
     }
 
-    public double latestCurrencyRate(String toCurrency) {
-        var responseMono = webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/latest")
-                        .queryParam("access_key", apiKey)
-                        .queryParam("symbols", toCurrency)
-                        .queryParam("format", 1)
-                        .build())
-                .retrieve()
-                .bodyToMono(FixerLatestCurrencyResponse.class);
+    public Map<String, Double> allLatestCurrencyRates() {
+        return getCurrencyRates(Optional.empty());
+    }
 
-        return responseMono.map(response -> response.getRates().get(toCurrency)).block();
+    public double latestCurrencyRate(String toCurrency) {
+        return getCurrencyRates(Optional.of(toCurrency)).get(toCurrency);
     }
 }
