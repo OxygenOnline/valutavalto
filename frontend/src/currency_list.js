@@ -14,6 +14,8 @@ fs.readFile('currencies.json', 'utf8', (err, data) => {
             currencies.forEach((currency) => {
                 console.log(currency);
             });
+
+            module.exports = currencies;
         } else {
             console.error('The JSON data does not contain a "rates" property.');
         }

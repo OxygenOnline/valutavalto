@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import InputAmount from './InputAmount';
 import ConvertedAmount from './ConvertedAmount';
 
+const currencies = require('./currency_list');
 function App() {
   return (
     <div className="App">
@@ -19,10 +20,12 @@ function App() {
             </Col>
             <Col md>
               <Form.Select>
-              <option key = 'blankChoice' hidden value> Target Currency </option>
-              <option>USD</option>
-              <option>HUF</option>
-              <option>GBP</option>
+                <option key='blankChoice' hidden value>
+                  Target Currency
+                </option>
+                {currencies.map((currency) => (
+                    <option key={currency}>{currency}</option>
+                ))}
               </Form.Select>
             </Col>
             <Col md>
