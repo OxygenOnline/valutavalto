@@ -1,5 +1,6 @@
 package hu.unideb.inf.controller;
 
+import hu.unideb.inf.service.ExchangeRateService;
 import hu.unideb.inf.service.FixerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ public class ExchangeRateController {
 
     @Autowired
     FixerService fixerService;
+    ExchangeRateService exchangeRateService;
 
     @GetMapping("/currencycodes")
     public List<String> getSupportedCurrencies() {
@@ -38,7 +40,7 @@ public class ExchangeRateController {
                           @RequestParam() String to,
                           @RequestParam(required = false, defaultValue = "1") double amount) {
         if(from.equals("EUR"))
-            return new ResponseEntity<Double>(getRateEUR(to)*amount, HttpStatus.OK);
+            return new ResponseEntity<Double>(exchangeRateService.convertCurrency(from,to,amount), HttpStatus.OK);
         return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
     }
 
