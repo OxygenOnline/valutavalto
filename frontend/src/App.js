@@ -82,6 +82,7 @@ function App() {
                             type="number"
                             placeholder="Enter the amount"
                             value={fromCurrencyAmount}
+                            min={1}
                             onChange={handleFromCurrencyAmountChange}
                         />
                       </Form.Group>
