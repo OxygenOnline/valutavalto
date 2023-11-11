@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import InputAmount from './InputAmount';
 import ConvertedAmount from './ConvertedAmount';
 
-const currencies = require('./currency_list');
+import currencies from './currency_list';
 function App() {
   return (
     <div className="App">
