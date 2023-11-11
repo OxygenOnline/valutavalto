@@ -5,20 +5,20 @@ import hu.unideb.inf.service.FixerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/exchangerates")
 public class ExchangeRateController {
 
     @Autowired
     FixerService fixerService;
+
+    @Autowired
     ExchangeRateService exchangeRateService;
 
     @GetMapping("/currencycodes")
@@ -39,9 +39,7 @@ public class ExchangeRateController {
     public ResponseEntity<Double> Convert(@RequestParam() String from,
                           @RequestParam() String to,
                           @RequestParam(required = false, defaultValue = "1") double amount) {
-        if(from.equals("EUR"))
-            return new ResponseEntity<Double>(exchangeRateService.convertCurrency(from,to,amount), HttpStatus.OK);
-        return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<Double>(exchangeRateService.convertCurrency(from, to, amount), HttpStatus.OK);
     }
 
     @GetMapping("/latest/ratemap")
