@@ -16,7 +16,7 @@ function App() {
         <Container>
           <Row>
             <Col md>
-              <InputAmount />
+              <InputAmount/>
             </Col>
             <Col md>
               <Form.Select>
@@ -29,7 +29,7 @@ function App() {
               </Form.Select>
             </Col>
             <Col md>
-              <ConvertedAmount />
+              <ConvertedAmount/>
             </Col>
           </Row>
         </Container>
