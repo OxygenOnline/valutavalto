@@ -1,6 +1,5 @@
 package hu.unideb.inf.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,8 +8,11 @@ import java.util.List;
 @Service
 public class ExchangeRateServiceImpl implements ExchangeRateService {
 
-    @Autowired
     FixerService fixerService;
+
+    public ExchangeRateServiceImpl(FixerService fixerService) {
+        this.fixerService = fixerService;
+    }
 
     @Override
     public double convertCurrency(String from, String to, double amount) {

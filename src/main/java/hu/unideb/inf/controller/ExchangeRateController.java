@@ -2,7 +2,6 @@ package hu.unideb.inf.controller;
 
 import hu.unideb.inf.service.ExchangeRateService;
 import hu.unideb.inf.service.FixerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,16 +9,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController
 @CrossOrigin
 @RequestMapping("/exchangerates")
 public class ExchangeRateController {
 
-    @Autowired
     FixerService fixerService;
 
-    @Autowired
     ExchangeRateService exchangeRateService;
+
+    public ExchangeRateController(FixerService fixerService, ExchangeRateService exchangeRateService) {
+        this.fixerService = fixerService;
+        this.exchangeRateService = exchangeRateService;
+    }
 
     @GetMapping("/currencycodes")
     public List<String> getSupportedCurrencies() {
