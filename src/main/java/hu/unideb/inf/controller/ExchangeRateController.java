@@ -1,13 +1,9 @@
 package hu.unideb.inf.controller;
 
 import hu.unideb.inf.service.ExchangeRateService;
-import hu.unideb.inf.service.FixerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 
 @RestController
@@ -15,43 +11,16 @@ import java.util.Map;
 @RequestMapping("/exchangerates")
 public class ExchangeRateController {
 
-    FixerService fixerService;
+    private final ExchangeRateService exchangeRateService;
 
-    ExchangeRateService exchangeRateService;
-
-    public ExchangeRateController(FixerService fixerService, ExchangeRateService exchangeRateService) {
-        this.fixerService = fixerService;
+    public ExchangeRateController(ExchangeRateService exchangeRateService) {
         this.exchangeRateService = exchangeRateService;
     }
 
-    @GetMapping("/currencycodes")
-    public List<String> getSupportedCurrencies() {
-        return List.of(
-                "EUR",
-                "USD",
-                "HUF"
-        );
-    }
-
-    @GetMapping("/latest/fromEUR")
-    public double getRateEUR(@RequestParam() String to) {
-        return fixerService.latestCurrencyRate(to);
-    }
-
     @GetMapping("/latest/convert")
-    public ResponseEntity<Double> Convert(@RequestParam() String from,
+    public ResponseEntity<Double> convert(@RequestParam() String from,
                           @RequestParam() String to,
                           @RequestParam(required = false, defaultValue = "1") double amount) {
-        return new ResponseEntity<Double>(exchangeRateService.convertCurrency(from, to, amount), HttpStatus.OK);
-    }
-
-    @GetMapping("/latest/ratemap")
-    public ResponseEntity<Map<String, Double>> getRateMap(@RequestParam(required = false, defaultValue = "EUR") String base) {
-        if(base.equals("EUR"))
-            return new ResponseEntity<>(
-                    Map.of("USD", getRateEUR("USD"),
-                            "HUF", getRateEUR("HUF")),
-                    HttpStatus.OK);
-        return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(exchangeRateService.convertCurrency(from, to, amount), HttpStatus.OK);
     }
 }

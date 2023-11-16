@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public class ExchangeRateServiceImpl implements ExchangeRateService {
 
-    FixerService fixerService;
+    private final FixerService fixerService;
 
     public ExchangeRateServiceImpl(FixerService fixerService) {
         this.fixerService = fixerService;
