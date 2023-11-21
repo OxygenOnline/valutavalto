@@ -105,7 +105,7 @@ function App() {
                         disabled={true}
                         name="ToCurrencyAmount"
                         type="number"
-                        value={toCurrencyAmount}
+                        value={Number(toCurrencyAmount).toFixed(2)}
                         onChange={handleToCurrencyAmountChange}
                       />
                     </Form.Group>
