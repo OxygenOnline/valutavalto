@@ -1,7 +1,7 @@
 # Currency exchange application 💻💰💸
 
 ## Main feature
-This repository contains the source code of an API-based currency excahnge application.
+This repository contains the source code of an API-based currency exchange application.
 
 The project was created as the requirement of a university-based class on software development methodologies using agile scrum. 
 
@@ -17,6 +17,6 @@ The project was created as the requirement of a university-based class on softwa
 ## The development
 In order to develop this application we used the following:
 
-- [Spring Boot](https://spring.io/projects/spring-boot) for frontend development
+- [Spring Boot](https://spring.io/projects/spring-boot) for backend development
 - [React.js](https://react.dev/) for frontend development
 - [fixer.io](https://fixer.io/) currency exchange API
