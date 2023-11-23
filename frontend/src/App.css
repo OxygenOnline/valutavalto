@@ -1,24 +1,72 @@
-.light-theme .App-header{
-  background-color: #fff;
-  color: #333;
-}
-
-.dark-theme .App-header{
-  background-color: #333;
-  color: #fff;
-}
-
-.App {
-  text-align: center;
-}
-
-.App-header {
-  background-color: green;
+#MainWrapper {
+  background: radial-gradient(circle, #0066ff 0%, #000000 100%);;
   min-height: 100vh;
+  color: lightskyblue;
+  font-size: 3rem;
+  font-family: "Courier New", monospace;
+}
+
+#Wrapper {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  padding: 1em;
+  border-radius: 1.5em;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+
+#Wrapper * {
+  margin-top: 1rem;
+}
+
+.wrapperTitle {
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.horizontalBreak {
+  width: 100%;
+  border-top: medium solid lightskyblue;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inputAmount[type="number"]:focus {
+  border: 0;
+}
+
+.inputAmount {
+  text-align: center;
+  background: linear-gradient(0deg, rgba(0,121,255,0.5) 0%, rgba(0,121,255,0.2) 50%, rgba(0,121,255,0.5) 100%);
+  border: thin solid rgba(0,121,255,1);
+  color: lightskyblue;
+  width: 10rem;
+}
+
+.SelectCurrency {
+  width: 6rem;
+  background: linear-gradient(0deg, rgba(0,121,255,0.5) 0%, rgba(0,121,255,0.2) 50%, rgba(0,121,255,0.5) 100%);
+  border: thin solid rgba(0,121,255,1);
+  text-align: center;
+  padding-right: 1rem;
+  color: lightskyblue;
+}
+
+.fromInput{
+  margin-top: 1rem;
+}
+
+select option {
+  background-color: rgba(0,0,0,0.6);
 }

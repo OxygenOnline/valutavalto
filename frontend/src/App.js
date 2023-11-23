@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Col, Form, Container } from 'react-bootstrap';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.css';
 
 import currencies from './currency_list';
 import axios from "axios";
@@ -16,9 +16,6 @@ function App() {
   const [toCurrency, setToCurrency] = useState("HUF");
 
   const [theme, setTheme] = useState('default');
-  const handleThemeChange = (event) => {
-    setTheme(event.target.value);
-  };
 
   useEffect(() => {
     axios.defaults.baseURL = "http://localhost:9090";
@@ -51,81 +48,42 @@ function App() {
   }
 
   return (
-    <div className={`App ${theme}-theme`}>
-      <header className="App-header">
-        <Container>
-          <Form.Select style={{ width: '20vh', float: 'right' }} onChange={handleThemeChange} value={theme}>
-            <option value="default">Default Theme</option>
-            <option value="light">Light Theme</option>
-            <option value="dark">Dark Theme</option>
-          </Form.Select>
-        </Container>
-        <Container className='mb-4'>
-          <h1>Currency Converter</h1>
-        </Container>
-        <Container>
-          <Row>
-            <Col md>
-              <Row>
-                <Form>
-                  <Col>
-                    <Form.Group>
-                      <Form.Control
-                        name="FromCurrencyAmount"
-                        type="number"
-                        placeholder="Enter the amount"
-                        value={fromCurrencyAmount}
-                        min={1}
-                        onChange={handleFromCurrencyAmountChange}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col>
-                    <Form.Select
-                      name="FromCurrencyList"
-                      onChange={handleFromCurrencyChange}
-                      value={fromCurrency}>
-                      {currencies.map((currency) => (
-                        <option key={currency}>{currency}</option>
-                      ))}
-                    </Form.Select>
-                  </Col>
-                </Form>
-              </Row>
-            </Col>
-            <Col>
-              Equals
-            </Col>
-            <Col md>
-              <Row>
-                <Form>
-                  <Col>
-                    <Form.Group>
-                      <Form.Control
-                        disabled={true}
-                        name="ToCurrencyAmount"
-                        type="number"
-                        value={Number(toCurrencyAmount).toFixed(2)}
-                        onChange={handleToCurrencyAmountChange}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col>
-                    <Form.Select
-                      name="ToCurrencyList"
-                      onChange={handleToCurrencyChange}
-                      value={toCurrency}>
-                      {currencies.map((currency) => (
-                        <option key={currency}>{currency}</option>
-                      ))}
-                    </Form.Select>
-                  </Col>
-                </Form>
-              </Row>
-            </Col>
-          </Row>
-        </Container>
-      </header>
+    <div id="MainWrapper" className={`App ${theme}-theme`}>
+      <div id="Wrapper" >
+        <div className="wrapperTitle" >Currency converter</div>
+        <div className="horizontalBreak"></div>
+        <Form.Control
+            className="inputAmount fromInput"
+            size="lg"
+            name="FromCurrencyAmount"
+            type="number"
+            placeholder="Enter the amount"
+            value={fromCurrencyAmount}
+            onChange={handleFromCurrencyAmountChange}
+        />
+        <Form.Select
+            className="SelectCurrency"
+            size="lg"
+            name="FromCurrencyList"
+            onChange={handleFromCurrencyChange}
+            value={fromCurrency}>
+          {currencies.map((currency) => (
+              <option key={currency}>{currency}</option>
+          ))}
+        </Form.Select>
+        <div>Equals</div>
+        <div>{Number(toCurrencyAmount).toFixed(2)}</div>
+        <Form.Select
+            className="SelectCurrency"
+            size="lg"
+            name="ToCurrencyList"
+            onChange={handleToCurrencyChange}
+            value={toCurrency}>
+          {currencies.map((currency) => (
+              <option key={currency}>{currency}</option>
+          ))}
+        </Form.Select>
+      </div>
     </div>
   );
 }
