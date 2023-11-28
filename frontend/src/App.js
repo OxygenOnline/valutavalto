@@ -15,7 +15,10 @@ function App() {
   const [toCurrencyAmount, setToCurrencyAmount] = useState(0);
   const [toCurrency, setToCurrency] = useState("HUF");
 
-  const [theme, setTheme] = useState('default');
+  const [theme, setTheme] = useState('blue');
+  const handleThemeChange = (event) => {
+    setTheme(event.target.value);
+  };
 
   useEffect(() => {
     axios.defaults.baseURL = "http://localhost:9090";
@@ -49,6 +52,10 @@ function App() {
 
   return (
     <div id="MainWrapper" className={`App ${theme}-theme`}>
+      <Form.Select className="theme-selector" style={{ width: '20vh', float: 'left' ,margin: '1em'}} onChange={handleThemeChange} value={theme}>
+        <option value="purple">Purple</option>
+        <option value="blue">Blue</option>
+      </Form.Select>
       <div id="Wrapper" >
         <div className="wrapperTitle" >Currency converter</div>
         <div className="horizontalBreak"></div>
